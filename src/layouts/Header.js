@@ -12,6 +12,14 @@ const Header = () => {
   const changeTheme = useThemeChange();
   const oath = useOath();
   const { login, handleLogout, user } = oath;
+
+  const handleClickWithError = (action) => {
+    return () => {
+      action();
+      throw new Error("Sentry Test Error from Header");
+    };
+  };
+
   return (
     <>
       <AppBar
@@ -29,9 +37,9 @@ const Header = () => {
                 display: "flex",
                 borderRadius: "50%",
               }}
-              onClick={() => {
+              onClick={handleClickWithError(() => {
                 navigate("/");
-              }}
+              })}
               style={{ cursor: "pointer" }}
             >
               <img
@@ -45,18 +53,38 @@ const Header = () => {
                 }}
               />
             </Box>
-            <Button color="inherit" component={Link} to="/">
+            <Button
+              color="inherit"
+              component={Link}
+              to="/"
+              onClick={handleClickWithError(() => {})}
+            >
               Home
             </Button>
             {user.role === "user" && (
               <>
-                <Button color="inherit" component={Link} to="/news">
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/news"
+                  onClick={handleClickWithError(() => {})}
+                >
                   News
                 </Button>
-                <Button color="inherit" component={Link} to="/about">
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/about"
+                  onClick={handleClickWithError(() => {})}
+                >
                   About
                 </Button>
-                <Button color="inherit" component={Link} to="/contact">
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/contact"
+                  onClick={handleClickWithError(() => {})}
+                >
                   Contact
                 </Button>
               </>
@@ -67,6 +95,7 @@ const Header = () => {
                   color="inherit"
                   component={Link}
                   to="/admin/orchid-management"
+                  onClick={handleClickWithError(() => {})}
                 >
                   Orchids Management
                 </Button>
@@ -74,6 +103,7 @@ const Header = () => {
                   color="inherit"
                   component={Link}
                   to="/admin/user-management"
+                  onClick={handleClickWithError(() => {})}
                 >
                   User Management
                 </Button>
@@ -86,11 +116,15 @@ const Header = () => {
               component={Link}
               to="/login"
               style={{ backgroundColor: "rgb(102, 59, 45)" }}
+              onClick={handleClickWithError(() => {})}
             >
               Login
             </Button>
           ) : (
-            <Button variant="outlined" onClick={handleLogout}>
+            <Button
+              variant="outlined"
+              onClick={handleClickWithError(handleLogout)}
+            >
               Log out
             </Button>
           )}
@@ -111,7 +145,7 @@ const Header = () => {
             bgcolor: "#663b2d",
           },
         }}
-        onClick={changeTheme}
+        onClick={handleClickWithError(changeTheme)}
       >
         Toggle theme
       </Button>

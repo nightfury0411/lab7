@@ -148,14 +148,6 @@ const OrchidDetailPage = () => {
           >
             Break the world
           </Button>
-          <Button
-            type="button"
-            onClick={() => {
-              throw new Error("Error");
-            }}
-          >
-            Click Here To Test Error
-          </Button>
           ;
         </Box>
       </Box>
