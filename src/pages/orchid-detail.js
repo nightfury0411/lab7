@@ -148,7 +148,6 @@ const OrchidDetailPage = () => {
           >
             Break the world
           </Button>
-          ;
           <Button
             type="button"
             onClick={() => {
