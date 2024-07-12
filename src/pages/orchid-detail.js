@@ -27,7 +27,8 @@ const OrchidDetailPage = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    alert(`Check your cart`);
+    // Ném ra lỗi khi nhấn vào nút BUY NOW
+    throw new Error("Sentry Test Error on BUY NOW");
   };
 
   if (!id) return null;
@@ -146,6 +147,15 @@ const OrchidDetailPage = () => {
             }}
           >
             Break the world
+          </Button>
+          ;
+          <Button
+            type="button"
+            onClick={() => {
+              throw new Error("Error");
+            }}
+          >
+            Click Here To Test Error
           </Button>
           ;
         </Box>
